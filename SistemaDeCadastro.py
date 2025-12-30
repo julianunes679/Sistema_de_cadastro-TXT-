@@ -9,13 +9,50 @@ while True:
     opcao = input("Digite o número de uma opção: ")
 
     if opcao == "1":
-        print("1 - Vamos iniciar o novo cadastro")
+        nome = input("Nome: ")
+        idade = input("Idade: ")
+        curso = input("Curso: ")
+
+        cadastro = {
+            "nome": nome, 
+            "idade": idade,
+            "curso": curso
+        }
+        
+        cadastros.append(cadastro)
+        
+        print("Cadastro realizado com sucesso!")
+
 
     elif opcao == "2":
-        print("2 - Esses são os cadastros do sistema")
+        if len(cadastros) == 0:
+            print("Nenhum cadastro encontrado")
+        else:
+            for cadastro in cadastros:
+                print (f"nome: {cadastro['nome']}")
+                print (f"idade: {cadastro['idade']}")
+                print (f"curso: {cadastro['curso']}")
+                print ("---------------------------")
+
     
     elif opcao == "3":
-        print("3 - qual cadastro deseja buscar")
+
+        nome_buscar = input("Digite o nome do cadastro: ")
+
+        encontrado = False
+
+        for cadastro in cadastros:
+            if nome_buscar == cadastro["nome"]:
+                print(f"Nome: {cadastro['nome']}")
+                print(f"Idade: {cadastro['idade']}")
+                print(f"Curso: {cadastro['curso']}")
+                print("---------------------------")
+                encontrado = True
+                break
+
+        if encontrado == False:
+            print("Cadastro não localizado!")
+
 
     elif opcao == "4":
         print("4 - Sair")
