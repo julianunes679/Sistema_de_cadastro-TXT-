@@ -1,0 +1,3 @@
+Julia,20,Engenharia de Software
+Amanda ,32,Enfermagem
+Paulo,26,Direito 

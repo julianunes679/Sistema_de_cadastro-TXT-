@@ -5,6 +5,7 @@ while True:
     print("2 - Listar cadastros")
     print("3 - Buscar cadastro")
     print("4 - Sair")
+    print("5 - Excluir cadastro")
 
     opcao = input("Digite o número de uma opção: ")
 
@@ -14,31 +15,30 @@ while True:
         curso = input("Curso: ")
 
         cadastro = {
-            "nome": nome, 
+            "nome": nome,
             "idade": idade,
             "curso": curso
         }
-        
-        cadastros.append(cadastro)
-        
-        print("Cadastro realizado com sucesso!")
 
+        cadastros.append(cadastro)
+
+        with open("cadastros.txt", "a") as arquivo:
+            arquivo.write(f"{nome},{idade},{curso}\n")
+
+        print("Cadastro realizado com sucesso!")
 
     elif opcao == "2":
         if len(cadastros) == 0:
             print("Nenhum cadastro encontrado")
         else:
             for cadastro in cadastros:
-                print (f"nome: {cadastro['nome']}")
-                print (f"idade: {cadastro['idade']}")
-                print (f"curso: {cadastro['curso']}")
-                print ("---------------------------")
+                print(f"Nome: {cadastro['nome']}")
+                print(f"Idade: {cadastro['idade']}")
+                print(f"Curso: {cadastro['curso']}")
+                print("---------------------------")
 
-    
     elif opcao == "3":
-
         nome_buscar = input("Digite o nome do cadastro: ")
-
         encontrado = False
 
         for cadastro in cadastros:
@@ -53,10 +53,23 @@ while True:
         if encontrado == False:
             print("Cadastro não localizado!")
 
-
     elif opcao == "4":
-        print("4 - Sair")
+        print("Saindo do sistema...")
         break
+
+    elif opcao == "5":
+        nome_excluir = input("Digite o nome do cadastro a excluir: ")
+        encontrado = False
+
+        for cadastro in cadastros:
+            if cadastro["nome"] == nome_excluir:
+                cadastros.remove(cadastro)
+                print("Cadastro removido com sucesso!")
+                encontrado = True
+                break
+
+        if encontrado == False:
+            print("Cadastro não encontrado!")
 
     else:
         print("Opção inválida")
